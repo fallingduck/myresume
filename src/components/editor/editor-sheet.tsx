@@ -100,12 +100,23 @@ export function EditorSheet({
                             key={field.attributeId}
                             field={field}
                             value={group[field.attributeId]}
-                            onChange={v =>
+                            onChange={v => {
+                              const nextGroup = {
+                                ...group,
+                                [field.attributeId]: v,
+                              };
+                              if (
+                                mod.key === 'avatar' &&
+                                field.attributeId === 'src' &&
+                                v
+                              ) {
+                                nextGroup.hidden = false;
+                              }
                               onConfigChange({
                                 ...config,
-                                [mod.key]: { ...group, [field.attributeId]: v },
-                              })
-                            }
+                                [mod.key]: nextGroup,
+                              });
+                            }}
                           />
                         );
                       })}

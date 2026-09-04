@@ -11,7 +11,13 @@ export type ModuleKey =
   | 'workExpList'
   | 'projectList';
 
-export type FieldType = 'input' | 'textarea' | 'checkbox' | 'select' | 'number';
+export type FieldType =
+  | 'input'
+  | 'textarea'
+  | 'checkbox'
+  | 'select'
+  | 'number'
+  | 'image';
 
 export type FieldSchema = {
   type: FieldType;
@@ -44,10 +50,10 @@ export const MODULE_FIELDS: Record<ModuleKey, FieldSchema[]> = {
   avatar: [
     { type: 'checkbox', attributeId: 'hidden', displayName: '隐藏头像' },
     {
-      type: 'input',
+      type: 'image',
       attributeId: 'src',
-      displayName: '头像地址',
-      placeholder: 'https://xxx.png',
+      displayName: '头像图片',
+      placeholder: '也可以粘贴图片 URL',
     },
     {
       type: 'select',
