@@ -34,5 +34,5 @@ export function setQueryParam(key: string, value: string | undefined) {
   }
   url.searchParams.delete('lang');
   url.searchParams.delete('template');
-  window.location.href = url.toString();
+  window.history.replaceState({}, '', url.toString());
 }

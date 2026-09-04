@@ -1,11 +1,12 @@
 import { getDevice } from '@/lib/device';
-import { setQueryParam, type ResumeMode } from '@/lib/query';
+import type { ResumeMode } from '@/lib/query';
 
 type Props = {
   mode: ResumeMode;
+  onModeChange: (mode: ResumeMode) => void;
 };
 
-export function Header({ mode }: Props) {
+export function Header({ mode, onModeChange }: Props) {
   const isMobile = getDevice() === 'mobile';
 
   return (
@@ -13,12 +14,12 @@ export function Header({ mode }: Props) {
       <span>在线简历生成器</span>
       <span className="flex items-center gap-3">
         {!isMobile && mode !== 'edit' && (
-          <button type="button" onClick={() => setQueryParam('mode', 'edit')}>
+          <button type="button" onClick={() => onModeChange('edit')}>
             编辑
           </button>
         )}
         {mode === 'edit' && (
-          <button type="button" onClick={() => setQueryParam('mode', 'read')}>
+          <button type="button" onClick={() => onModeChange('read')}>
             预览
           </button>
         )}

@@ -24,6 +24,7 @@ export function App() {
   const [error, setError] = useState<string | null>(null);
   const [config, setConfig] = useState<ResumeConfig>();
   const [theme, setTheme] = useState<ThemeConfig>(DEFAULT_THEME);
+  const [mode, setMode] = useState(query.mode);
 
   useEffect(() => {
     let cancelled = false;
@@ -64,12 +65,17 @@ export function App() {
     if (nextTheme) setTheme(nextTheme);
   }, []);
 
-  const isEdit = query.mode === 'edit' && getDevice() !== 'mobile';
+  const onModeChange = useCallback((nextMode: typeof query.mode) => {
+    setMode(nextMode);
+    setQueryParam('mode', nextMode);
+  }, []);
+
+  const isEdit = mode === 'edit' && getDevice() !== 'mobile';
 
   return (
     <div className="min-h-screen bg-[#f5f5f5] pb-20">
       <Toaster />
-      <Header mode={query.mode} />
+      <Header mode={mode} onModeChange={onModeChange} />
       {isEdit && (
         <div className="no-print bg-amber-50 px-4 py-2 text-xs text-amber-900">
           内容只在当前页面中处理，不会上传到服务器。刷新页面前请导出 JSON。
@@ -82,7 +88,7 @@ export function App() {
         {error && (
           <div className="flex max-w-md flex-col items-start gap-3 p-6">
             <p>{error}。请重新导入 JSON 文件或检查分享链接。</p>
-            <Button onClick={() => setQueryParam('mode', 'edit')}>
+            <Button onClick={() => onModeChange('edit')}>
               进入在线编辑
             </Button>
           </div>
