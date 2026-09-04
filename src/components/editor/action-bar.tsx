@@ -10,7 +10,6 @@ import type { ResumeConfig, ThemeConfig } from '@/types/resume';
 type Props = {
   config: ResumeConfig;
   theme: ThemeConfig;
-  user?: string;
   onConfigChange: (next: ResumeConfig) => void;
   onThemeChange: (next: ThemeConfig) => void;
   onImport: (raw: unknown) => void;
@@ -19,7 +18,6 @@ type Props = {
 export function ActionBar({
   config,
   theme,
-  user,
   onConfigChange,
   onThemeChange,
   onImport,
@@ -34,8 +32,8 @@ export function ActionBar({
   };
 
   const onSave = () => {
-    exportDataToLocal(payload(), `${user || 'resume'}'s resume info`);
-    toast('已下载配置');
+    exportDataToLocal(payload(), 'resume.json');
+    toast('JSON 已下载');
   };
 
   const onShare = async () => {
@@ -56,7 +54,7 @@ export function ActionBar({
         复制配置
       </Button>
       <Button className="w-[106px]" onClick={onSave}>
-        保存简历
+        导出 JSON
       </Button>
       <Button
         variant="outline"
@@ -90,7 +88,7 @@ export function ActionBar({
         下载 PDF
       </Button>
       <Button className="w-[106px]" onClick={onShare}>
-        分享
+        分享链接
       </Button>
     </div>
   );

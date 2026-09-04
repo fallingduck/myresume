@@ -1,11 +1,8 @@
 export type ResumeMode = 'edit' | 'read';
 
 export type ResumeQuery = {
-  user?: string;
-  branch: string;
   mode: ResumeMode;
   data?: string;
-  url?: string;
 };
 
 export function parseQuery(search: string): ResumeQuery {
@@ -13,18 +10,17 @@ export function parseQuery(search: string): ResumeQuery {
     search.startsWith('?') ? search.slice(1) : search
   );
   const mode = params.get('mode');
+  const data = params.get('data') ?? undefined;
   return {
-    user: params.get('user') ?? undefined,
-    branch: params.get('branch') ?? 'master',
-    mode: mode === 'edit' ? 'edit' : 'read',
-    data: params.get('data') ?? undefined,
-    url: params.get('url') ?? undefined,
+    mode:
+      mode === 'read' ? 'read' : data && !mode ? 'read' : 'edit',
+    data,
   };
 }
 
 export function getWindowQuery(): ResumeQuery {
   if (typeof window === 'undefined') {
-    return { branch: 'master', mode: 'read' };
+    return { mode: 'edit' };
   }
   return parseQuery(window.location.search);
 }

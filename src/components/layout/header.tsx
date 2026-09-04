@@ -3,10 +3,9 @@ import { setQueryParam, type ResumeMode } from '@/lib/query';
 
 type Props = {
   mode: ResumeMode;
-  user?: string;
 };
 
-export function Header({ mode, user }: Props) {
+export function Header({ mode }: Props) {
   const isMobile = getDevice() === 'mobile';
 
   return (
@@ -18,7 +17,7 @@ export function Header({ mode, user }: Props) {
             编辑
           </button>
         )}
-        {mode === 'edit' && user && (
+        {mode === 'edit' && (
           <button type="button" onClick={() => setQueryParam('mode', 'read')}>
             预览
           </button>

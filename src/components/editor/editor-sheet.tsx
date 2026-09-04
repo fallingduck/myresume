@@ -44,7 +44,9 @@ export function EditorSheet({
       >
         <SheetHeader>
           <SheetTitle>编辑简历</SheetTitle>
-          <SheetDescription>修改后会自动缓存在本地。</SheetDescription>
+          <SheetDescription>
+            内容只保存在当前页面，刷新后会丢失，请及时导出 JSON。
+          </SheetDescription>
         </SheetHeader>
         <div className="space-y-4 px-4 pb-8">
           <div className="grid grid-cols-2 gap-3">

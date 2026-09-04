@@ -3,7 +3,7 @@ import { toast } from 'sonner';
 import { ActionBar } from '@/components/editor/action-bar';
 import { Footer } from '@/components/layout/footer';
 import { Header } from '@/components/layout/header';
-import { Template3 } from '@/components/resume/template3';
+import { Template3 } from '@/components/Resume/Template3';
 import { Button } from '@/components/ui/button';
 import { Toaster } from '@/components/ui/sonner';
 import { DEFAULT_RESUME } from '@/data/default-resume';
@@ -12,7 +12,6 @@ import { getWindowQuery, setQueryParam } from '@/lib/query';
 import { loadResume } from '@/lib/load-resume';
 import { normalizeLoadedData } from '@/lib/normalize';
 import { decompressShare } from '@/lib/share';
-import { saveToStorage } from '@/lib/storage';
 import {
   DEFAULT_THEME,
   type ResumeConfig,
@@ -30,8 +29,6 @@ export function App() {
     let cancelled = false;
     loadResume(query, {
       defaultResume: DEFAULT_RESUME,
-      fetchFn: fetch,
-      storage: window.localStorage,
       decompress: decompressShare,
     })
       .then(result => {
@@ -57,48 +54,25 @@ export function App() {
     }
   }, []);
 
-  const onConfigChange = useCallback(
-    (next: ResumeConfig) => {
-      setConfig(next);
-      saveToStorage(query.user, next, window.localStorage);
-    },
-    [query.user]
-  );
+  const onConfigChange = useCallback((next: ResumeConfig) => {
+    setConfig(next);
+  }, []);
 
-  const onImport = useCallback(
-    (raw: unknown) => {
-      const { config: nextConfig, theme: nextTheme } = normalizeLoadedData(raw);
-      setConfig(nextConfig);
-      if (nextTheme) setTheme(nextTheme);
-      saveToStorage(query.user, nextConfig, window.localStorage);
-    },
-    [query.user]
-  );
+  const onImport = useCallback((raw: unknown) => {
+    const { config: nextConfig, theme: nextTheme } = normalizeLoadedData(raw);
+    setConfig(nextConfig);
+    if (nextTheme) setTheme(nextTheme);
+  }, []);
 
   const isEdit = query.mode === 'edit' && getDevice() !== 'mobile';
-  const repoUser = query.user;
 
   return (
     <div className="min-h-screen bg-[#f5f5f5] pb-20">
       <Toaster />
-      <Header mode={query.mode} user={query.user} />
+      <Header mode={query.mode} />
       {isEdit && (
         <div className="no-print bg-amber-50 px-4 py-2 text-xs text-amber-900">
-          编辑之后，请及时把配置导出并保存到个人仓库 resume.json。
-          {repoUser ? (
-            <a
-              className="ml-2 text-sky-700 underline"
-              href={`https://github.com/${repoUser}/${repoUser}/blob/${query.branch}/resume.json`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {repoUser}/resume.json
-            </a>
-          ) : (
-            <span className="ml-2 text-muted-foreground">
-              可用 ?user=你的GitHub用户名 拉取同名仓库下的 resume.json
-            </span>
-          )}
+          内容只在当前页面中处理，不会上传到服务器。刷新页面前请导出 JSON。
         </div>
       )}
       <main className="page flex justify-center p-3 max-md:flex-col-reverse max-md:p-0 print:p-0">
@@ -107,7 +81,7 @@ export function App() {
         )}
         {error && (
           <div className="flex max-w-md flex-col items-start gap-3 p-6">
-            <p>{error}。请检查用户名，或确认 resume.json 可公开访问。</p>
+            <p>{error}。请重新导入 JSON 文件或检查分享链接。</p>
             <Button onClick={() => setQueryParam('mode', 'edit')}>
               进入在线编辑
             </Button>
@@ -120,7 +94,6 @@ export function App() {
               <ActionBar
                 config={config}
                 theme={theme}
-                user={query.user}
                 onConfigChange={onConfigChange}
                 onThemeChange={setTheme}
                 onImport={onImport}
@@ -129,7 +102,7 @@ export function App() {
           </>
         )}
       </main>
-      <Footer user={query.user} />
+      <Footer />
     </div>
   );
 }

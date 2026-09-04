@@ -1,28 +1,14 @@
 import { Github } from 'lucide-react';
 
 type Props = {
-  user?: string;
 };
 
-export function Footer({ user }: Props) {
+export function Footer(_: Props) {
   return (
     <footer className="no-print fixed right-0 bottom-0 left-0 pt-6">
       <div className="relative flex items-center justify-center bg-[rgb(39,63,117)] px-3 py-3 text-white/85">
         <span>
-          Made with ❤️
-          {user && (
-            <>
-              {' '}
-              by{' '}
-              <button
-                type="button"
-                className="cursor-pointer"
-                onClick={() => window.open(`https://github.com/${user}`)}
-              >
-                {user}
-              </button>
-            </>
-          )}
+          隐私优先：简历内容只在你的浏览器中处理
         </span>
         <a
           href="https://github.com/fallingduck/myresume"
