@@ -1,0 +1,262 @@
+.template3-resume {
+  width: 794px;
+  min-height: 942px;
+  margin-bottom: 60px;
+  background: #fff;
+  box-shadow: 0 2px 4px 1px rgba(0, 0, 0, 0.15);
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 14px;
+}
+
+@media (max-width: 794px) {
+  .template3-resume {
+    width: 100%;
+  }
+}
+
+@media print {
+  @page {
+    size: A4;
+  }
+
+  .template3-resume {
+    width: 100%;
+    box-shadow: none;
+    margin-bottom: 0;
+  }
+}
+
+.template3-resume .basic-info {
+  padding: 24px 18px 24px 24px;
+}
+
+.template3-resume .main-info {
+  padding: 24px 24px 32px 32px;
+  background: #fff;
+}
+
+.template3-resume .basic-info .avatar {
+  margin: 12px auto;
+  display: block;
+  width: 84px;
+  height: 84px;
+  object-fit: cover;
+}
+
+.template3-resume .basic-info .avatar.is-circle {
+  border-radius: 50%;
+}
+
+.template3-resume .basic-info .avatar.is-square {
+  border-radius: 2px;
+}
+
+.template3-resume .basic-info .name {
+  margin: 0 0 8px 4px;
+  font-size: 24px;
+  line-height: 36px;
+}
+
+.template3-resume .basic-info .profile {
+  margin-bottom: 16px;
+}
+
+.template3-resume .basic-info .profile-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 4px;
+}
+
+.template3-resume .basic-info .profile-list > div {
+  display: flex;
+  align-items: center;
+  flex: 220px 1;
+  margin-right: 4px;
+}
+
+.template3-resume .basic-info .profile-list > div:not(:last-of-type) {
+  margin-bottom: 4px;
+}
+
+.template3-resume .basic-info .profile-list .profile-icon {
+  margin-right: 6px;
+  display: inline-flex;
+  opacity: 0.85;
+}
+
+.template3-resume .ribbon-card {
+  position: relative;
+  margin-top: 16px;
+  padding-top: 28px;
+  border: 1px solid #f0f0f0;
+  border-radius: 0;
+  background: #fff;
+}
+
+.template3-resume .ribbon-card + .ribbon-card {
+  border-top: 0;
+  margin-top: 0;
+}
+
+.template3-resume .ribbon-title {
+  position: absolute;
+  top: 4px;
+  left: 0;
+  height: 24px;
+  padding: 0 12px;
+  line-height: 24px;
+  font-size: 16px;
+  letter-spacing: 0;
+  color: #fff;
+}
+
+.template3-resume .ribbon-body {
+  padding: 12px 24px;
+}
+
+.template3-resume .education-item:not(:first-of-type) {
+  margin-top: 8px;
+}
+
+.template3-resume .sub-info {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.template3-resume .section-award .sub-info {
+  font-size: 14px;
+  margin-left: 8px;
+}
+
+.template3-resume .section-work > div {
+  line-height: 24px;
+}
+
+.template3-resume .section-work a.sub-info {
+  font-size: 12px;
+  margin-left: 8px;
+}
+
+.template3-resume .skill-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.template3-resume .skill-item:not(:first-of-type) {
+  margin-top: 2px;
+}
+
+.template3-resume .skill-rate {
+  font-size: 14px;
+  display: flex;
+  gap: 2px;
+}
+
+.template3-resume .skill-star {
+  position: relative;
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  line-height: 14px;
+  color: #f0f0f0;
+}
+
+.template3-resume .skill-star-fill {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.template3-resume .main-info section {
+  margin-bottom: 16px;
+}
+
+.template3-resume .main-info section:not(:first-of-type) {
+  margin-top: 24px;
+}
+
+.template3-resume .main-info .section-header {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.template3-resume .main-info .section-header h1 {
+  position: relative;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  width: max-content;
+  line-height: 24px;
+  padding: 0 100px 0 10px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  margin: 0 0 0 -12px;
+}
+
+.template3-resume .main-info .section-header h1::before {
+  content: '';
+  display: block;
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  position: absolute;
+  right: -9px;
+  top: 4px;
+  transform: rotate(45deg);
+}
+
+.template3-resume .section-info {
+  font-size: 18px;
+  line-height: 24px;
+  color: rgba(0, 0, 0, 0.85);
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.template3-resume .section-info .sub-info,
+.template3-resume .section-info .info-time {
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 12px;
+  margin-left: 8px;
+  font-weight: 300;
+}
+
+.template3-resume .section-item:not(:first-of-type) {
+  margin-top: 18px;
+}
+
+.template3-resume .section-detail {
+  letter-spacing: 1.2px;
+}
+
+.template3-resume .section-detail:not(:first-of-type) {
+  margin-top: 4px;
+}
+
+.template3-resume .work-description,
+.template3-resume .project-content {
+  white-space: pre-wrap;
+}
+
+.template3-resume .role-tag {
+  display: inline-block;
+  height: 20px;
+  line-height: 20px;
+  padding: 0 6px;
+  border: none;
+  border-radius: 2px;
+  color: #fff;
+  font-size: 12px;
+}
+
+.template3-resume .link-btn {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}

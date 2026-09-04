@@ -1,49 +1,49 @@
-## 🧾 Resume Generator
+# 在线简历生成器
 
-在线简历生成器。无须 fork 仓库，即可在线预览、编辑和下载 PDF 简历。✨ [在线编辑](https://visiky.github.io/resume)
+基于 [visiky/resume](https://github.com/visiky/resume) 的二次开发。Vite + React 18 + Tailwind + shadcn。一期只内置 Template3，界面中文。
 
-内置 3 套模板，支持**自定义主题颜色**、**自定义模块标题**、**国际化(中/英)** 等.
+在线编辑、本地缓存、JSON 导入导出、打印 PDF。也可从 GitHub 同名仓库或任意 raw JSON 拉取简历。
 
-|默认模板| 简易模板| 简易模板2（适用于多页）|
-| -------------------------------- | --------------------------------------------------|----------------------- |
-| <img src="https://user-images.githubusercontent.com/15646325/147406773-d1583d83-b4ed-496a-9b7c-2fca8a5fc624.png" height="280" />|<img src="https://user-images.githubusercontent.com/15646325/147406862-19ac2b2a-6dcf-466f-a0dd-53fd1a6abccd.png" height="280" />| <img src="https://user-images.githubusercontent.com/15646325/147406903-19529fe9-9ef8-4877-8165-b2fad0e3b48a.png" height="280" />|
-|[Live Demo](https://visiky.github.io/resume?user=visiky)  |[Live Demo](https://visiky.github.io/resume?user=visiky&template=template2)|[Live Demo](https://visiky.github.io/resume?user=visiky&template=template3) |
-
-## 如何使用（How to use）
-
-**方式 1:**
-
-在线编辑 -> 导出配置 -> 存储“简历信息”在个人 github special 仓库下（例如: [visiky/visiky](https://github.com/visiky/visiky/blob/master/resume.json)）
-
-**方式 2:**
-
-直接创建一个 `resume.json` 文件在自己的 special 仓库下 (内容参考: [visiky/visiky](https://github.com/visiky/visiky/blob/master/resume.json)).
-
-**最后**
-
-访问 https://visiky.github.io/resume?user={user}&branch={branch}
-
-参数说明:
-
-| 参数   | 描述          | 默认值       |
-| ------ | ------------- | ------------ |
-| user   | github 用户名 | 必选         |
-| template | 模板        | 默认: template1 |
-| branch | 分支名        | 默认: master |
-| mode | 模式        | 备注: 默认为‘只读’模式，设置为: `mode=edit` 即可进入编辑模式 |
-| lang | 语言        | 默认: zh-CN |
-
-## 本地开发（Local develop）
+## 本地开发
 
 ```bash
-# pnpm required, to see: https://pnpm.io/installation
-# Install dependencies
 pnpm install
-# Then, start
-npm start
+pnpm dev
 ```
 
-## ✨ Recommendation
+- 开发：<http://localhost:5173/?mode=edit>
+- 测试：`pnpm test`
+- 构建：`pnpm build`
 
-- [resumemaker](https://www.resumemaker.online/es.php)
-- [Geek Resume - Pure Markdown, an online resume editor for developer.](https://www.jijian.press/)
+部署走 [Vercel](https://vercel.com)。连这个仓库后会按 `vercel.json` 把所有路径回退到 `index.html`。
+
+## 查询参数
+
+| 参数 | 说明 | 默认 |
+| --- | --- | --- |
+| `user` | GitHub 用户名，拉取 `github.com/{user}/{user}/resume.json` | 无则用默认简历 / 本地缓存 |
+| `branch` | 仓库分支 | `master` |
+| `url` | 任意 CORS 开放的 raw JSON（gist / raw.githubusercontent.com） | 无 |
+| `data` | 压缩后的分享配置（分享按钮生成） | 无 |
+| `mode` | `edit` 进入编辑；省略或 `read` 为只读 | `read` |
+
+加载顺序：`data` → `url` →（编辑模式本地缓存）→ `user` → 默认简历。
+
+只读模式下 `user` 拉取失败会提示进入编辑。`url` 需要目标站点允许浏览器跨域，一期没有代理。
+
+示例：
+
+```
+https://your-app.vercel.app/?mode=edit
+https://your-app.vercel.app/?user=yourname
+https://your-app.vercel.app/?url=https://raw.githubusercontent.com/yourname/yourname/master/resume.json
+```
+
+## 保存简历
+
+编辑后点「保存简历」下载 JSON，放到自己的 GitHub 同名仓库根目录 `resume.json`。或点「分享」复制带 `?data=` 的链接。
+
+## 仓库
+
+- 本仓库：<https://github.com/fallingduck/myresume>
+- 上游（已停更）：<https://github.com/visiky/resume>
